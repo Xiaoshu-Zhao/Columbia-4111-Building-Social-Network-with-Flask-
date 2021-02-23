@@ -1,0 +1,62 @@
+{%extends 'base.html'%}
+
+{%block body%}
+<h1>detail page of post: {{data1[0]}}</h1>
+<h4>net votes: {{data2[1]}} total votes:{{data2[2]}}</h4>
+<table>
+    <tr>
+        <th>post date</th>
+        <th>post time</th>
+        <th>posted by</th>
+        <th>content</th>
+    </tr>
+    <tr>
+        <td>{{data1[3].strftime('%Y-%m-%d')}}</td>
+        <td>{{data1[4].strftime('%H:%M:%S')}}</td>
+        <td>{{data1[2]}}</td>
+        <td>{{data1[1]}}</td>
+    </tr>
+</table>
+<h1>comments of this post:</h1>
+{% if data3|length < 1 %}
+<h4>This post has 0 comment</h4>
+{% else %}
+<table>
+    <tr>
+        <th>commented by:</th>
+        <th>content</th>
+    </tr>
+{% for n in data3%}
+    <tr>
+        <td>{{n[0]}}</td>
+        <td>{{n[1]}}</td>
+    </tr>
+{%endfor%}
+</table>
+{%endif%}
+
+<h1>add your comment right now!</h1>
+
+<form method="POST" action="/add_comment/{{data1[0]}}">
+    <p>your sid(student id) is: </p> <input type="text" name="sid"> 
+    <p> content of your comment is: </p> <input type="text" name="comment"> <input type="submit" value="Add">   
+    <br>    
+</form>
+
+<h1>vote for this post:</h1> 
+<form action="/vote_post/{{data1[0]}}" method='POST'>
+    <p>your sid(student id) is: </p > <input type="text" name="sid">
+    <label for='cond'>Vote this post:</label>
+        <select name="cond" id ='cond'>
+            <option value="Up">Up</option>
+            <option value="Down">Down</option>
+        </select>
+        <input type="submit" value="Vote">
+</form>
+
+
+<p><a href="/">Go to the home page</a></p>
+<p><a href="login">Go to the login page</a></p>
+
+<br>
+{% endblock %}

@@ -1,0 +1,19 @@
+{%extends 'base.html'%}
+
+{%block body%}
+<h1>Welcome! this is our project webpage!</h1>
+<h1>our users are</h1>
+<table>
+    {% for n in data %}
+    <tr>
+      <td>{{n}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p><a href="allposts">Go to the post page</a></p>
+<p><a href="events">Go to the event page</a></p>
+<p><a href="login">Go to the login page</a></p>
+<p><a href="id">Go to your profile page</a></p>
+
+{%endblock%}
